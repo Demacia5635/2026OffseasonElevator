@@ -5,10 +5,11 @@
 package frc.robot;
 
 import frc.demacia.utils.Log.LogManager;
+import frc.demacia.utils.Sensors.LimitSwitch;
 import frc.robot.Constants.OperatorConstants;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -19,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
+  LimitSwitch sensor;
 
   public static boolean isComp = DriverStation.isFMSAttached();
   private static boolean hasRemovedFromLog = false;
@@ -34,6 +36,8 @@ public class RobotContainer {
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
 
+
+    SmartDashboard.putData(sensor);
     new LogManager();
 
     // Configure the trigger bindings
@@ -52,6 +56,7 @@ public class RobotContainer {
       LogManager.removeInComp();
     }
   }
+  
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
