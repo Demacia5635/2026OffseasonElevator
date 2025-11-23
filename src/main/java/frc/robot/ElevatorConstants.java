@@ -41,7 +41,7 @@ public class ElevatorConstants {
 
 
 
-public enum STATE{
+public static enum ELEVATOR_STATE{
     IDLE(0),
     L1(0),
     L2(0),
@@ -49,10 +49,10 @@ public enum STATE{
     L4(0),
     DEFAULT(0);
 
-public double distance;
-STATE(double distance){
-    this.distance=distance;
-    }
+public double height;
+ELEVATOR_STATE(double height){
+    this.height=height;
+        }
     }
 }
 

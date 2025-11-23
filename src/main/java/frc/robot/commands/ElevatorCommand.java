@@ -5,14 +5,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.ElevatorConstants.STATE;
+import frc.robot.ElevatorConstants.ELEVATOR_STATE;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class ElevatorCommand extends Command {
   /** Creates a new ElevatorCommand. */
   private ElevatorSubsystem elevatorSubsystem;
-  STATE currentState = STATE.DEFAULT;
+  ELEVATOR_STATE currentState = ELEVATOR_STATE.DEFAULT;
 
   public ElevatorCommand(ElevatorSubsystem elevatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
@@ -27,7 +27,12 @@ public class ElevatorCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      switch(currentState)
+      switch(currentState){
+        case IDLE,L1,L2,L3,L4,DEFAULT:
+        elevatorSubsystem.setMotion(currentState.height);
+        break;
+
+      }
   }
 
   // Called once the command ends or is interrupted.
