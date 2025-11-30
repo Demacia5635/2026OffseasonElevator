@@ -12,7 +12,7 @@ import frc.robot.subsystems.ElevatorSubsystem;
 public class ElevatorCommand extends Command {
   /** Creates a new ElevatorCommand. */
   private ElevatorSubsystem elevatorSubsystem;
-  ELEVATOR_STATE currentState = ELEVATOR_STATE.DEFAULT;
+  ELEVATOR_STATE currentState = ELEVATOR_STATE.IDLE;
 
   public ElevatorCommand(ElevatorSubsystem elevatorSubsystem) {
     this.elevatorSubsystem = elevatorSubsystem;
@@ -28,17 +28,24 @@ public class ElevatorCommand extends Command {
   @Override
   public void execute() {
       switch(currentState){
-        case IDLE,L1,L2,L3,L4,DEFAULT:
-        elevatorSubsystem.setMotion(currentState.height);
+        case L1,L2,L3:
+        elevatorSubsystem.setHeight(currentState.height);
         break;
+        case IDLE:
+        elevatorSubsystem.stop();
+        default:
+        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
+          elevatorSubsystem.stop();
+
 
       }
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
-
+  public void end(boolean interrupted) {
+    elevatorSubsystem.stop();
+  }
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
