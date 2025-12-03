@@ -15,7 +15,7 @@ public class ElevatorConstants {
     public static final double DIAMETER_2 = 0.0656;
     public static final double GEAR_RATIO_1 = 12;
     public static final double GEAR_RATIO_2 = 12; 
-    public static final double MAX_CURRENT = 0;
+    public static final double MAX_CURRENT = 80;
     public static final int limitSwitchChannel = 1;
 
     
@@ -33,17 +33,17 @@ public class ElevatorConstants {
     public static final TalonConfig TALON_CONFIG2 = new TalonConfig(motor2_ID, CANBUS, null)
     .withBrake(true)
     .withMeterMotor(GEAR_RATIO_2, DIAMETER_2)
-    .withPID(0, 0, 0, 0, 0, 0, 0)
     .withMotionParam(MAX_VELOCITY, MAX_ACCELERATION, MAX_JERK)
     .withCurrent(MAX_CURRENT);
-
+    
 
 
 public static enum ELEVATOR_STATE{
-    IDLE(0.1), //all of the heights are relative to the ground 
-    L1(0.46),
+    IDLE(0), 
+    L1(0.46),//all of the heights are relative to the ground 
     L2(0.81),
     L3(1.21);
+
 
 public double height;
 ELEVATOR_STATE(double height){

@@ -3,50 +3,36 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot.commands;
-
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.ElevatorConstants.ELEVATOR_STATE;
 import frc.robot.subsystems.ElevatorSubsystem;
-
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ElevatorCommand extends Command {
-  /** Creates a new ElevatorCommand. */
+public class CalibrationCommand extends Command {
   private ElevatorSubsystem elevatorSubsystem;
-  ELEVATOR_STATE currentState = ELEVATOR_STATE.IDLE;
-
-  public ElevatorCommand(ElevatorSubsystem elevatorSubsystem) {
-    this.elevatorSubsystem = elevatorSubsystem;
+  private Timer timer;
+  /** Creates a new CalibrationCommand. */
+  public CalibrationCommand(ElevatorSubsystem elevatorSubsystem) {
+    this.elevatorSubsystem=elevatorSubsystem;
     addRequirements(elevatorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
+
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
-      switch(elevatorSubsystem.getState()){
-        case L1,L2,L3:
-        elevatorSubsystem.setHeight(currentState.height);
-        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
-        break;
-        case IDLE:
-        elevatorSubsystem.stop();
-        default:
-        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
-          elevatorSubsystem.stop();
-
-
-      }
+  public void initialize() {
+    timer.reset();
+    timer.start();
   }
+  // Called every time the scheduler runs while the command is scheduled.
+
+  @Override
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    elevatorSubsystem.stop();
-  }
+  public void end(boolean interrupted) {}
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
