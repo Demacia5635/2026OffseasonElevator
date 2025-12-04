@@ -30,12 +30,11 @@ public class ElevatorCommand extends Command {
       switch(elevatorSubsystem.getState()){
         case L1,L2,L3,MAXIMUM,MINIMUM:
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
-        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
+        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);//need to use ff
         break;
         case IDLE:
-        elevatorSubsystem.stop();
-        if(elevatorSubsystem.isUpSensor())
-        elevatorSubsystem.stop();
+        elevatorSubsystem.stop();//need to use ff
+        break;
         default:
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
           elevatorSubsystem.stop();

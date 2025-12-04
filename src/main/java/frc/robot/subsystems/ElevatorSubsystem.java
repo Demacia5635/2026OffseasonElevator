@@ -48,7 +48,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     return true;
     else return false;
   }
-  public boolean isUpSensor(){
+  public boolean isUpMagnet(){
     if(getLimit()&&getCurrentHeight()>0.3)
     return true;
     else return false;
@@ -87,14 +87,15 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
-    builder.addBooleanProperty("down ", () -> isDownMagnet(), null);
+    builder.addBooleanProperty("DownMagent ", () -> isDownMagnet(), null);
     builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
-    builder.addDoubleProperty("Current Height", () -> getCurrentHeight(), null);
+    builder.addBooleanProperty("UpMagnet", () -> isUpMagnet(), null);
 
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    if(isUpMagnet()) 
   }
 }
