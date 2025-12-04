@@ -29,10 +29,12 @@ public class ElevatorCommand extends Command {
   public void execute() {
       switch(elevatorSubsystem.getState()){
         case L1,L2,L3,MAXIMUM,MINIMUM:
-        elevatorSubsystem.setHeight(currentState.height);
+        elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
         break;
         case IDLE:
+        elevatorSubsystem.stop();
+        if(elevatorSubsystem.isUpSensor())
         elevatorSubsystem.stop();
         default:
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);

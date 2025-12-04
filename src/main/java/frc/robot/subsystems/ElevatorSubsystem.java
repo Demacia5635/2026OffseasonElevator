@@ -43,10 +43,21 @@ public class ElevatorSubsystem extends SubsystemBase {
     motor1.setEncoderPosition(positon);
 }
 
- 
-  public boolean getLimit() { //need to find a way to seperate the upper magnet and the lower magnet
+  public boolean isDownMagnet(){
+    if(getLimit()&&getCurrentHeight()<0.3)
+    return true;
+    else return false;
+  }
+  public boolean isUpSensor(){
+    if(getLimit()&&getCurrentHeight()>0.3)
+    return true;
+    else return false;
+  }
+
+  public boolean getLimit() { 
     return limitSwitch.get();
   }
+
 
   public void resetEncoder() {
     motor1.setEncoderPosition(0);
@@ -76,8 +87,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   }
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
-    builder.addBooleanProperty("limit switch ", () -> getLimit(), null);
+    builder.addBooleanProperty("down ", () -> isDownMagnet(), null);
+    builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
     builder.addDoubleProperty("Current Height", () -> getCurrentHeight(), null);
+
   }
 
   @Override

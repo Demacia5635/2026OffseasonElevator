@@ -44,7 +44,9 @@ public class CalibrationCommand extends Command {
     elevatorSubsystem.stop();
     elevatorSubsystem.resetEncoder();
     elevatorSubsystem.setState(ELEVATOR_STATE.MINIMUM);
+
   }
+
   
   // Returns true when the command should end.
   @Override
