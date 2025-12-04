@@ -28,7 +28,7 @@ public class ElevatorCommand extends Command {
   @Override
   public void execute() {
       switch(elevatorSubsystem.getState()){
-        case L1,L2,L3:
+        case L1,L2,L3,MAXIMUM,MINIMUM:
         elevatorSubsystem.setHeight(currentState.height);
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
         break;
@@ -37,8 +37,6 @@ public class ElevatorCommand extends Command {
         default:
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
           elevatorSubsystem.stop();
-
-
       }
   }
 

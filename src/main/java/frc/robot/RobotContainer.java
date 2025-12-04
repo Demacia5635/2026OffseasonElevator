@@ -6,7 +6,6 @@ package frc.robot;
 
 import frc.demacia.utils.Log.LogManager;
 import frc.demacia.utils.Sensors.LimitSwitch;
-import frc.robot.Constants.OperatorConstants;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
