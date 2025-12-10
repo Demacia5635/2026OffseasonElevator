@@ -5,13 +5,12 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.ElevatorConstants;
-import frc.robot.ElevatorConstants.ELEVATOR_STATE;
 import frc.robot.subsystems.ElevatorSubsystem;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class CalibrationCommand extends Command {
   private ElevatorSubsystem elevatorSubsystem;
   private Timer timer;
+  
   /** Creates a new CalibrationCommand. */
   public CalibrationCommand(ElevatorSubsystem elevatorSubsystem) {
     this.elevatorSubsystem=elevatorSubsystem;
@@ -41,7 +40,7 @@ public class CalibrationCommand extends Command {
   public void end(boolean interrupted) {
     timer.stop();
     timer.reset();
-    elevatorSubsystem.stop();
+    elevatorSubsystem.stop();//need to do ff
     elevatorSubsystem.resetEncoder();
     elevatorSubsystem.setState(ELEVATOR_STATE.MINIMUM);
 

@@ -11,8 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.demacia.utils.Motors.TalonMotor;
 import frc.demacia.utils.Sensors.LimitSwitch;
-import frc.robot.ElevatorConstants;
-import frc.robot.ElevatorConstants.ELEVATOR_STATE;
+import frc.robot.Constants.ElevatorConstants;
 
 public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
@@ -62,6 +61,9 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void resetEncoder() {
     motor1.setEncoderPosition(0);
   }
+  public void keepHeight(){
+
+  }
 
   public void stop() {
     motor1.stopMotor();
@@ -88,8 +90,8 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
     builder.addBooleanProperty("DownMagent ", () -> isDownMagnet(), null);
-    builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
     builder.addBooleanProperty("UpMagnet", () -> isUpMagnet(), null);
+    builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
 
   }
 
