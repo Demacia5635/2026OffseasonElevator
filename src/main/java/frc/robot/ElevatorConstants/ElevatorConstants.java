@@ -1,4 +1,4 @@
-package frc.robot.Constants;
+package frc.robot.ElevatorConstants;
 
 import frc.demacia.utils.Motors.BaseMotorConfig.Canbus;
 import frc.demacia.utils.Sensors.LimitSwitchConfig;

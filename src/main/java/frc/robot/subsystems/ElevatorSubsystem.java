@@ -11,7 +11,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.demacia.utils.Motors.TalonMotor;
 import frc.demacia.utils.Sensors.LimitSwitch;
-import frc.robot.Constants.ElevatorConstants;
+import frc.robot.ElevatorConstants.ElevatorConstants;
+import frc.robot.ElevatorConstants.ElevatorConstants.ELEVATOR_STATE;
 
 public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
@@ -98,6 +99,6 @@ public class ElevatorSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(isUpMagnet()) 
+    //if(isUpMagnet()) 
   }
 }
