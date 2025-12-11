@@ -31,7 +31,8 @@ public class CalibrationCommand extends Command {
 
   @Override
   public void execute() {
-  if(timer.hasElapsed(ElevatorConstants.timeToCalibrate))elevatorSubsystem.setDuty(ElevatorConstants.powerToLowerTheElevator);
+  if(timer.hasElapsed(ElevatorConstants.timeToCalibrate))
+  elevatorSubsystem.setDuty(ElevatorConstants.powerToLowerTheElevator);
   
   else elevatorSubsystem.setDuty(ElevatorConstants.powerToRaiseTheElevator);
 
@@ -42,7 +43,7 @@ public class CalibrationCommand extends Command {
   public void end(boolean interrupted) {
     timer.stop();
     timer.reset();
-    elevatorSubsystem.stop();//need to do ff
+    elevatorSubsystem.stop();
     elevatorSubsystem.resetEncoder();
     elevatorSubsystem.setState(ELEVATOR_STATE.MINIMUM);
 

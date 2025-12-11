@@ -20,6 +20,8 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   private final LimitSwitch limitSwitch;
   public ELEVATOR_STATE state;
+  protected double[] testValues = new double[] {0.0};
+
 
   public ElevatorSubsystem() {
     limitSwitch = new LimitSwitch(ElevatorConstants.LIMIT_SWITCH);
@@ -44,14 +46,11 @@ public class ElevatorSubsystem extends SubsystemBase {
 }
 
   public boolean isDownMagnet(){
-    if(getLimit()&&getCurrentHeight()<0.3)
-    return true;
-    else return false;
+    return getLimit()&&getCurrentHeight()<0.3;
   }
   public boolean isUpMagnet(){
-    if(getLimit()&&getCurrentHeight()>0.3)
-    return true;
-    else return false;
+    return getLimit()&&getCurrentHeight()>0.3;
+    
   }
 
   public boolean getLimit() { 
@@ -61,9 +60,6 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public void resetEncoder() {
     motor1.setEncoderPosition(0);
-  }
-  public void keepHeight(){
-
   }
 
   public void stop() {
@@ -80,10 +76,17 @@ public class ElevatorSubsystem extends SubsystemBase {
   public void setDuty(double duty) {
     motor1.setDuty(duty);
   }
-
+ 
   public ELEVATOR_STATE getState() {
     return state;
   }
+
+  private double[] getTestValues(){
+    return testValues;
+}
+private void setTestValues(double[] testValues){
+  this.testValues = testValues;
+}
 
   public double getCurrentHeight() {
     return motor1.getCurrentPosition();
@@ -93,12 +96,23 @@ public class ElevatorSubsystem extends SubsystemBase {
     builder.addBooleanProperty("DownMagent ", () -> isDownMagnet(), null);
     builder.addBooleanProperty("UpMagnet", () -> isUpMagnet(), null);
     builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
-
+    builder.addDoubleArrayProperty(getName() + "/Test Values", () -> getTestValues(), testValues -> setTestValues(testValues));
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    //if(isUpMagnet()) 
+    if(isUpMagnet()){
+      setState(ELEVATOR_STATE.MAXIMUM);
+    }
+    if(isDownMagnet()){
+      setState(ELEVATOR_STATE.MINIMUM);
+    }
+    if (testValues != null && testValues.length > 0) {
+      double duty = testValues[0];
+      motor1.setDuty(duty);
+
+
   }
+} 
 }
