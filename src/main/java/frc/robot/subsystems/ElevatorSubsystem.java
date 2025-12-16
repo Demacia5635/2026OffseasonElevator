@@ -20,7 +20,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   private final LimitSwitch limitSwitch;
   public ELEVATOR_STATE state;
-  protected double[] testValues = new double[] {0.0};
+  private double testValues = 0;
 
 
   public ElevatorSubsystem() {
@@ -37,6 +37,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     stateChooser.addOption("L2", ELEVATOR_STATE.L2);
     stateChooser.addOption("L3", ELEVATOR_STATE.L3);
     stateChooser.addOption("IDLE", ELEVATOR_STATE.IDLE);
+    stateChooser.addOption("TESTING", ELEVATOR_STATE.TESTING);
     stateChooser.onChange(newState -> this.state = newState);
     SmartDashboard.putData(getName() + "Elevator State Chooser", stateChooser);
 
@@ -81,10 +82,10 @@ public class ElevatorSubsystem extends SubsystemBase {
     return state;
   }
 
-  private double[] getTestValues(){
+  public double getTestValues(){
     return testValues;
 }
-private void setTestValues(double[] testValues){
+public void setTestValues(double testValues){
   this.testValues = testValues;
 }
 
@@ -96,23 +97,12 @@ private void setTestValues(double[] testValues){
     builder.addBooleanProperty("DownMagent ", () -> isDownMagnet(), null);
     builder.addBooleanProperty("UpMagnet", () -> isUpMagnet(), null);
     builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
-    builder.addDoubleArrayProperty(getName() + "/Test Values", () -> getTestValues(), testValues -> setTestValues(testValues));
+    builder.addDoubleProperty(getName() + "/Test Values", () -> getTestValues(), testValues -> setTestValues(testValues));
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    if(isUpMagnet()){
-      setState(ELEVATOR_STATE.MAXIMUM);
-    }
-    if(isDownMagnet()){
-      setState(ELEVATOR_STATE.MINIMUM);
-    }
-    if (testValues != null && testValues.length > 0) {
-      double duty = testValues[0];
-      motor1.setDuty(duty);
-
-
+   
   }
-} 
 }

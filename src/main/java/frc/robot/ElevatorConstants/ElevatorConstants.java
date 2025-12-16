@@ -48,6 +48,7 @@ public static enum ELEVATOR_STATE{
     L1(0.46),//all of the heights are relative to the ground 
     L2(0.81),
     L3(1.21),
+    TESTING(0),
     MAXIMUM(1.3),
     MINIMUM(0);
 
