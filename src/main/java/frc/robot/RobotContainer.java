@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import frc.demacia.utils.Controller.CommandController;
+import frc.demacia.utils.Controller.CommandController.ControllerType;
 import frc.demacia.utils.Log.LogManager;
-import frc.demacia.utils.Sensors.LimitSwitch;
+import frc.robot.commands.CalibrationCommand;
+import frc.robot.commands.ElevatorCommand;
+import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -19,7 +22,9 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  LimitSwitch sensor;
+  public static ElevatorSubsystem elevator;
+  public static ElevatorCommand elevatorCommand;
+  public static CommandController controller;
 
   public static boolean isComp = DriverStation.isFMSAttached();
   private static boolean hasRemovedFromLog = false;
@@ -34,9 +39,10 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    elevator = new ElevatorSubsystem();
+    elevatorCommand = new ElevatorCommand(elevator);
+    controller = new CommandController(0, ControllerType.kPS5);
 
-
-    SmartDashboard.putData(sensor);
     new LogManager();
 
     // Configure the trigger bindings
@@ -67,7 +73,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    
+    elevator.setDefaultCommand(elevatorCommand);
+
+    controller.downButton().onTrue(new CalibrationCommand(elevator));
   }
 
   /**
