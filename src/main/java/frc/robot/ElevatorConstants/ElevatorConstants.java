@@ -12,7 +12,7 @@ public class ElevatorConstants {
     public static final double MAX_ACCELERATION = 3;
     public static final double MAX_JERK = 6;
     public static final double DIAMETER_1 = 0.065;
-    public static final double GEAR_RATIO_1 = 32;
+    public static final double GEAR_RATIO_1 = 36;
     public static final double MAX_CURRENT = 80;
     public static final int limitSwitchChannel = 1;
     public static final double timeToCalibrate =0.3;
@@ -28,10 +28,6 @@ public class ElevatorConstants {
     public static final boolean IS_BRAKE = true;
     public static final boolean IS_iNVERTED = true;
 
-
-
-
-    
     public static final LimitSwitchConfig LIMIT_SWITCH = new LimitSwitchConfig(limitSwitchChannel,"limit sensor");
 
 

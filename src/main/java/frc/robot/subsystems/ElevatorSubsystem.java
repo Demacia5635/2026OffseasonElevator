@@ -26,9 +26,10 @@ public class ElevatorSubsystem extends SubsystemBase {
   public ElevatorSubsystem() {
     limitSwitch = new LimitSwitch(ElevatorConstants.LIMIT_SWITCH);
     motor1 = new TalonMotor(ElevatorConstants.TALON_CONFIG1);
-
     state = ELEVATOR_STATE.IDLE;
     addNT();
+    SmartDashboard.putData("Elevator", this);
+
   }
 
   public void addNT() {

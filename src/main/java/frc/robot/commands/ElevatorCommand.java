@@ -30,13 +30,12 @@ public class ElevatorCommand extends Command {
       switch(elevatorSubsystem.getState()){
         case L1,L2,L3,MAXIMUM,MINIMUM:
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
-        elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
         break;
         case IDLE:
-        elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
         break;
         case TESTING:
         elevatorSubsystem.setHeight(elevatorSubsystem.getTestValues());
+        break;
         default:
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
