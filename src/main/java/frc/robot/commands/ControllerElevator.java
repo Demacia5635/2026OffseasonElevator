@@ -18,7 +18,8 @@ public class ControllerElevator extends Command {
   ElevatorSubsystem elevatorSubsystem;
   CommandController controller;
   private double joyright;
-  public ControllerElevator(CommandController controller,  ElevatorSubsystem elevatorSubsystem) {
+
+  public ControllerElevator(CommandController controller, ElevatorSubsystem elevatorSubsystem) {
     this.controller = controller;
     this.elevatorSubsystem = elevatorSubsystem;
     SmartDashboard.putData(elevatorSubsystem);
@@ -29,22 +30,24 @@ public class ControllerElevator extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    joyright=controller.getLeftY()*0.4;
-  if(controller.getRightY()>UtilsContants.ControllerConstants.PS5_STICK_DEADBAND)
-    elevatorSubsystem.setDuty(joyright);
-    
-    else elevatorSubsystem.setDuty(ElevatorConstants.powerToKeepHeight);
+    joyright = controller.getLeftY() * 0.4;
+    if (controller.getRightY() > UtilsContants.ControllerConstants.PS5_STICK_DEADBAND)
+      elevatorSubsystem.setDuty(joyright);
+
+    else
+      elevatorSubsystem.setDuty(ElevatorConstants.powerToKeepHeight);
   }
-   
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override
