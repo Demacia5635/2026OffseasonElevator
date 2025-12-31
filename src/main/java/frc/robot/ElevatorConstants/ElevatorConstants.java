@@ -6,7 +6,7 @@ import frc.demacia.utils.Motors.TalonConfig;
 
 public class ElevatorConstants {
 
-    public static final int motor1_ID = 0;
+    public static final int motor1_ID = 1;
     public static final Canbus CANBUS = Canbus.CANIvore;
     public static final double MAX_VELOCITY = 1.5;
     public static final double MAX_ACCELERATION = 3;
@@ -18,6 +18,7 @@ public class ElevatorConstants {
     public static final double timeToCalibrate =0.3;
     public static final double powerToLowerTheElevator = -0.2;
     public static final double powerToRaiseTheElevator = 0.1;
+    public static final double powerToKeepHeight = 0.1;
     public static final double kp= 0;
     public static final double ki= 0;
     public static final double ks= 0;

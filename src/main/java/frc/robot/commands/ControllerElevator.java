@@ -6,7 +6,10 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.demacia.utils.Utilities;
 import frc.demacia.utils.Controller.CommandController;
+import frc.demacia.utils.constants.UtilsContants;
+import frc.robot.ElevatorConstants.ElevatorConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -31,8 +34,13 @@ public class ControllerElevator extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    joyright=controller.getRightY();
+    joyright=controller.getLeftY()*0.4;
+  if(controller.getRightY()>UtilsContants.ControllerConstants.PS5_STICK_DEADBAND)
+    elevatorSubsystem.setDuty(joyright);
+    
+    else elevatorSubsystem.setDuty(ElevatorConstants.powerToKeepHeight);
   }
+   
 
   // Called once the command ends or is interrupted.
   @Override
