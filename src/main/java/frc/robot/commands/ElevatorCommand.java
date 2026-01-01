@@ -22,24 +22,25 @@ public class ElevatorCommand extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-      switch(elevatorSubsystem.getState()){
-        case L1,L2,L3,MAXIMUM,MINIMUM:
+    switch (elevatorSubsystem.getState()) {
+      case L1, L2, L3, MAXIMUM, MINIMUM:
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
         break;
-        case IDLE:
+      case IDLE:
         break;
-        case TESTING:
+      case TESTING:
         elevatorSubsystem.setHeight(elevatorSubsystem.getTestValues());
         break;
-        default:
+      default:
         elevatorSubsystem.setState(ELEVATOR_STATE.IDLE);
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
-      }
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -47,6 +48,7 @@ public class ElevatorCommand extends Command {
   public void end(boolean interrupted) {
     elevatorSubsystem.stop();
   }
+
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {

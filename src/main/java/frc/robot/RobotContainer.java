@@ -7,11 +7,14 @@ package frc.robot;
 import frc.demacia.utils.Controller.CommandController;
 import frc.demacia.utils.Controller.CommandController.ControllerType;
 import frc.demacia.utils.Log.LogManager;
+import frc.robot.ElevatorConstants.ElevatorConstants.ELEVATOR_STATE;
 import frc.robot.commands.CalibrationCommand;
+import frc.robot.commands.ControllerElevator;
 import frc.robot.commands.ElevatorCommand;
 import frc.robot.subsystems.ElevatorSubsystem;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 
@@ -39,11 +42,13 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    new LogManager();
+
+    controller = new CommandController(0, ControllerType.kXbox);
+
     elevator = new ElevatorSubsystem();
     elevatorCommand = new ElevatorCommand(elevator);
-    controller = new CommandController(0, ControllerType.kPS5);
 
-    new LogManager();
 
     // Configure the trigger bindings
     // testMotor.setDefaultCommand(new TestMotorCommand(testMotor,5););
@@ -73,9 +78,15 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    elevator.setDefaultCommand(elevatorCommand);
+    // elevator.setDefaultCommand(elevatorCommand);
 
-    controller.downButton().onTrue(new CalibrationCommand(elevator));
+    // controller.downButton().onTrue(new CalibrationCommand(elevator));
+    controller.rightButton().onTrue(new InstantCommand(() -> {
+      elevator.resetEncoder();
+      elevator.setState(ELEVATOR_STATE.MINIMUM);
+    }, elevator));
+    controller.leftButton().onTrue(new ControllerElevator(controller, elevator));
+
   }
 
   /**
