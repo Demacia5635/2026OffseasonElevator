@@ -4,12 +4,8 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.demacia.utils.Utilities;
 import frc.demacia.utils.Controller.CommandController;
-import frc.demacia.utils.constants.UtilsContants;
-import frc.robot.ElevatorConstants.ElevatorConstants;
 import frc.robot.subsystems.ElevatorSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
@@ -38,7 +34,6 @@ public class ControllerElevator extends Command {
     joyright = controller.getLeftY() * -1.0;
    // if (controller.getRightY() > UtilsContants.ControllerConstants.PS5_STICK_DEADBAND)
       elevatorSubsystem.setDuty(joyright);
-      System.out.println("Duty = " + joyright);
 
   //  else
    //   elevatorSubsystem.setDuty(ElevatorConstants.powerToKeepHeight);

@@ -16,6 +16,7 @@ public class CalibrationCommand extends Command {
   /** Creates a new CalibrationCommand. */
   public CalibrationCommand(ElevatorSubsystem elevatorSubsystem) {
     this.elevatorSubsystem=elevatorSubsystem;
+    this.timer = new Timer();
     addRequirements(elevatorSubsystem);
     // Use addRequirements() here to declare subsystem dependencies.
   }

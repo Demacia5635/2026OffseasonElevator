@@ -2,12 +2,12 @@ package frc.robot.ElevatorConstants;
 
 import frc.demacia.utils.Motors.BaseMotorConfig.Canbus;
 import frc.demacia.utils.Sensors.LimitSwitchConfig;
-import frc.demacia.utils.Motors.TalonConfig;
+import frc.demacia.utils.Motors.TalonFXConfig;
 
 public class ElevatorConstants {
 
     public static final int motor1_ID = 1;
-    public static final Canbus CANBUS = Canbus.CANIvore;
+    public static final Canbus CANBUS = Canbus.Rio;
     public static final double MAX_VELOCITY = 1.5;
     public static final double MAX_ACCELERATION = 3;
     public static final double MAX_JERK = 6;
@@ -32,7 +32,7 @@ public class ElevatorConstants {
     public static final LimitSwitchConfig LIMIT_SWITCH = new LimitSwitchConfig(limitSwitchChannel,"limit sensor");
 
 
-    public static final TalonConfig TALON_CONFIG1 = new TalonConfig(motor1_ID, CANBUS, "motor")
+    public static final TalonFXConfig TALON_CONFIG1 = new TalonFXConfig(motor1_ID, CANBUS, "motor")
     .withPID(kp, ki, kd, ks, kv, ka, kg)
     .withBrake(IS_BRAKE)
     .withMeterMotor(GEAR_RATIO_1, DIAMETER_1)

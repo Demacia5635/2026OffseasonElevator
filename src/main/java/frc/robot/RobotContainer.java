@@ -42,8 +42,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    new LogManager();
-
+      
     controller = new CommandController(0, ControllerType.kXbox);
 
     elevator = new ElevatorSubsystem();
@@ -80,7 +79,7 @@ public class RobotContainer {
   private void configureBindings() {
     // elevator.setDefaultCommand(elevatorCommand);
 
-    // controller.downButton().onTrue(new CalibrationCommand(elevator));
+     controller.downButton().onTrue(new CalibrationCommand(elevator));
     controller.rightButton().onTrue(new InstantCommand(() -> {
       elevator.resetEncoder();
       elevator.setState(ELEVATOR_STATE.MINIMUM);

@@ -33,6 +33,7 @@ public class ElevatorCommand extends Command {
         elevatorSubsystem.setHeight(elevatorSubsystem.getState().height);
         break;
       case IDLE:
+        elevatorSubsystem.setHeight(elevatorSubsystem.getCurrentHeight());
         break;
       case TESTING:
         elevatorSubsystem.setHeight(elevatorSubsystem.getTestValues());

@@ -9,14 +9,14 @@ import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.demacia.utils.Motors.TalonMotor;
+import frc.demacia.utils.Motors.TalonFXMotor;
 import frc.demacia.utils.Sensors.LimitSwitch;
 import frc.robot.ElevatorConstants.ElevatorConstants;
 import frc.robot.ElevatorConstants.ElevatorConstants.ELEVATOR_STATE;
 
 public class ElevatorSubsystem extends SubsystemBase {
   /** Creates a new ElevatorSubsystem. */
-  private final TalonMotor motor1;
+  private final TalonFXMotor motor1;
 
   private final LimitSwitch limitSwitch;
   public ELEVATOR_STATE state;
@@ -25,7 +25,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
   public ElevatorSubsystem() {
     limitSwitch = new LimitSwitch(ElevatorConstants.LIMIT_SWITCH);
-    motor1 = new TalonMotor(ElevatorConstants.TALON_CONFIG1);
+    motor1 = new TalonFXMotor(ElevatorConstants.TALON_CONFIG1);
     state = ELEVATOR_STATE.IDLE;
     addNT();
     SmartDashboard.putData("Elevator", this);
