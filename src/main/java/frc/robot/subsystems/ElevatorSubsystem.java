@@ -93,12 +93,17 @@ public void setTestValues(double testValues){
   public double getCurrentHeight() {
     return motor1.getCurrentPosition();
   }
+
+  // CHANGED: the whole method below (added @Override, setSmartDashboardType,
+  // renamed "up" -> "Height", fixed "DownMagent " typo, removed getName() + "/" prefix)
+  @Override
   public void initSendable(SendableBuilder builder) {
     super.initSendable(builder);
-    builder.addBooleanProperty("DownMagent ", () -> isDownMagnet(), null);
-    builder.addBooleanProperty("UpMagnet", () -> isUpMagnet(), null);
-    builder.addDoubleProperty("up", () -> getCurrentHeight(), null);
-    builder.addDoubleProperty(getName() + "/Test Values", () -> getTestValues(), testValues -> setTestValues(testValues));
+    builder.setSmartDashboardType("Elevator");
+    builder.addDoubleProperty("Height", this::getCurrentHeight, null);
+    builder.addBooleanProperty("DownMagnet", this::isDownMagnet, null);
+    builder.addBooleanProperty("UpMagnet", this::isUpMagnet, null);
+    builder.addDoubleProperty("Test Values", this::getTestValues, this::setTestValues);
   }
 
   @Override
